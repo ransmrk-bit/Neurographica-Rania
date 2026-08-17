@@ -596,7 +596,7 @@ h1,h2,h3,.brand,.quote,.section-head h2,.feature h2,.algorithm-banner h2,.about 
 
 <section class="white" id="free"><div class="container"><div class="free-box"><div><div class="kicker">Δωρεάν e-book</div><h2>Κάνε το πρώτο σου βήμα</h2><p>Λήψε ένα σύντομο, δωρεάν e-book με βασικά βήματα για να γνωρίσεις τη NeuroGraphica® — θα σου σταλεί απευθείας στο email σου.</p></div>
 <div class="materials">📄 χαρτί<br>🖊️ μαύρος μαρκαδόρος<br>🎨 χρώματα<br>🌿 χρόνος για εσένα</div>
-<form id="ebook-form" class="ebook-form" action="https://assets.mailerlite.com/jsonp/1004804/forms/195762346996532431/subscribe" method="post" target="_blank" novalidate>
+<form id="ebook-form" class="ebook-form" action="https://assets.mailerlite.com/jsonp/1004804/forms/195762346996532431/subscribe" method="post" target="ml-hidden-frame" novalidate>
   <input type="email" name="fields[email]" id="ebook-email" placeholder="Το email σου" autocomplete="email" required>
   <input type="hidden" name="ml-submit" value="1">
   <input type="hidden" name="anticsrf" value="true">
@@ -604,6 +604,7 @@ h1,h2,h3,.brand,.quote,.section-head h2,.feature h2,.algorithm-banner h2,.about 
   <button class="btn primary" type="submit">Στείλε μου το e-book ✦</button>
   <div class="form-note" id="ebook-form-note">Θα λάβεις το e-book στο email σου — μπορείς να διαγραφείς από τη λίστα οποιαδήποτε στιγμή.</div>
 </form>
+<iframe name="ml-hidden-frame" style="display:none" title="Καταχώρηση e-book" aria-hidden="true"></iframe>
 </div></div></section>
 
 <section class="paper" id="blog"><div class="container"><div class="section-head"><div class="kicker">Blog</div><h2>Ανακαλύπτοντας τη NeuroGraphica®</h2><p>Άρθρα, παρουσιάσεις, παραδείγματα και εκπαιδευτικό υλικό γύρω από τη NeuroGraphica®.</p></div><div class="blog-grid">
@@ -893,9 +894,9 @@ h1,h2,h3,.brand,.quote,.section-head h2,.feature h2,.algorithm-banner h2,.about 
   var note = document.getElementById('ebook-form-note');
   var defaultNote = note ? note.textContent : '';
   ebookForm.addEventListener('submit', function(){
-    // Το MailerLite ανοίγει σε νέα καρτέλα (target="_blank") — δεν μπλοκάρουμε την υποβολή,
-    // απλά ενημερώνουμε το μήνυμα εδώ. Το MailerLite μπορεί να ζητήσει επιβεβαίωση email (double opt-in).
-    if(note){ note.style.color = 'var(--purple)'; note.textContent = 'Σχεδόν έτοιμο! Άνοιξε μια νέα καρτέλα — αν σου ζητηθεί, επιβεβαίωσε την εγγραφή σου για να λάβεις το e-book.'; }
+    // Η φόρμα υποβάλλεται αόρατα σε κρυφό iframe (target="ml-hidden-frame") — ο επισκέπτης
+    // παραμένει στη σελίδα και βλέπει μόνο αυτό το μήνυμα, όχι την απάντηση JSON του MailerLite.
+    if(note){ note.style.color = 'var(--purple)'; note.textContent = 'Ευχαριστούμε! Το e-book σου έρχεται στο email σου σε λίγα λεπτά 🌿'; }
     setTimeout(function(){
       if(note){ note.style.color=''; note.textContent = defaultNote; }
     }, 9000);
